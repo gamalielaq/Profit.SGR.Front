@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PagesRoutingModule } from './pages/pages.routing';
+import { PageNotFoundComponent } from './pages/components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'Web-SGR', pathMatch: 'full' },
-  // { path: 'login', component: LoginComponent },
-  {
-    path: 'Web-SGR',
-    loadChildren: () => import('./pages/pages.module').then((m) => m.PagesModule),
-  },
-];
-
+  { path: '**', component: PageNotFoundComponent },
+]
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes),
+    PagesRoutingModule,
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

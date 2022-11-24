@@ -1,27 +1,22 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './home/home.component';
-import { SessionComponent } from './session/session.component';
+import { ChildRoutsModule } from './child-routs.module';
+import { PagesComponent } from './pages.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'Web-SGR', pathMatch: 'full' },
   {
-    path: '',
-    component: HomeComponent,
-    children: [
-      {
-        path: '',
-        // loadChildren: () => import('./../views/home/dashboard.module').then((m) => m.DashboardModule),
-      }
-    ],
+    path: '', component: PagesComponent,
+    // canActivate: [ AuthGuard ],
+    // canLoad: [ AuthGuard ],
+    loadChildren: () => import('./child-routs.module').then(m => m.ChildRoutsModule)
   },
-  {
-    path: 'session',
-    component: SessionComponent
-  },
-];
+]
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-exports: [RouterModule],
+  imports: [
+    RouterModule.forChild(routes)
+  ],
+  exports: [RouterModule],
 })
 export class PagesRoutingModule { }
