@@ -12,7 +12,7 @@ const components = [ HeaderComponent ]
     CommonModule
   ],
   exports: [
-    components
+    // components
   ]
 })
 export class SharedComponentsModule { }

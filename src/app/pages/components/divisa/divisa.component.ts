@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Divisa } from 'src/app/core/models/divisa.model';
+import { DivisaService } from 'src/app/core/services/divisa.service';
 
 @Component({
   selector: 'app-divisa',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DivisaComponent implements OnInit {
 
-  constructor() { }
+  public divisas: Divisa[] = [];
+
+  constructor(
+    private _divisaService: DivisaService
+  ) { }
 
   ngOnInit(): void {
+    this.listDivisas();
+  }
+
+  private listDivisas() {
+    this._divisaService.listDivisa().subscribe((response) => {
+      this.divisas = response;
+    });
   }
 
 }
